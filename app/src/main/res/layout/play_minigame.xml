@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/minigameHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mini Game"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:textStyle="bold"
+        android:background="#EEEEEE" />
+
+    <!-- Game area -->
+    <com.yourpackage.name.GameView
+        android:id="@+id/gameView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/minigameHeader" />
+
+</RelativeLayout>
