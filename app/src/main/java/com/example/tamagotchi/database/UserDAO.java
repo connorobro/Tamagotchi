@@ -1,0 +1,31 @@
+package com.example.tamagotchi.database;
+
+import androidx.lifecycle.LiveData;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
+
+import com.example.tamagotchi.database.entities.User;
+
+import java.util.List;
+
+public interface UserDAO {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insert(User... user);
+
+    @Delete
+    void delete(User user);
+
+    @Query("SELECT * FROM "+ database.USER_TABLE+" ORDER BY username")
+    LiveData<List<User>> getAllUsers();
+
+    @Query("DELETE FROM " + database.USER_TABLE)
+    void deleteAll();
+
+    @Query("SELECT * FROM " + database.USER_TABLE+" WHERE username == :username")
+    LiveData<User> getUserByName(String username);
+
+    @Query("SELECT * FROM " + database.USER_TABLE+" WHERE id == :userId")
+    LiveData<User> getUserById(int userId);
+}
