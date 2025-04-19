@@ -8,8 +8,10 @@ public class repository {
     private static repository repo;
 
     private repository(Application application){
-        //database db = database.getDatabase(application)
+        database db = database.getInstance(application);
         //this.userDAO= db.userDAO();
+        //need to fix the MiniGameActivity becasue making the abstarct for userDao causes an error in their
+        //
     }
 
 }
