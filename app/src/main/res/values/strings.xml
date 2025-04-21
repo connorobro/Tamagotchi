@@ -8,5 +8,7 @@
     <string name="logged_in">LOGGED IN</string>
     <string name="logout">Logout</string>
     <string name="cancel">Cancel</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="submit">submit</string>
 
 </resources>
