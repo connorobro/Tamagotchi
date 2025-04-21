@@ -12,7 +12,7 @@ import com.example.tamagotchi.database.entities.User;
 import java.util.List;
 
 @Dao
-public interface UserDAO {
+public interface userDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... user);
 

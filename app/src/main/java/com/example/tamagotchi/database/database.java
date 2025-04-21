@@ -49,7 +49,7 @@ public abstract class database extends RoomDatabase {
                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
                     super.onCreate(db);
                     databaseWriteExecutor.execute(() -> {
-                        UserDAO dao = INSTANCE.userDAO();
+                        userDAO dao = INSTANCE.userDAO();
                         dao.deleteAll();
                         User admin = new User("admin", "admin", true);
                         dao.insert(admin);
@@ -61,5 +61,5 @@ public abstract class database extends RoomDatabase {
             };
 
 
-    public abstract UserDAO userDAO();
+    public abstract userDAO userDAO();
 }
