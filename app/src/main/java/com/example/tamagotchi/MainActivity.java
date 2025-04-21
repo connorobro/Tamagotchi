@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -72,6 +73,15 @@ public class MainActivity extends AppCompatActivity {
                 this.user = user;
                 binding.titleText.setText("Welcome, " + user.getUsername() + "!");
                 invalidateOptionsMenu(); // Refresh menu to show username
+
+                if (user.isAdmin()) {
+                    binding.adminButton.setVisibility(View.VISIBLE);
+                    binding.adminButton.setOnClickListener(v -> {
+                        //startActivity(new Intent(this, AdminActivity.class)); This will start up a new screen activity if we need one.
+                    });
+                } else {
+                    binding.adminButton.setVisibility(View.GONE);
+                }
             }
         });
     }
