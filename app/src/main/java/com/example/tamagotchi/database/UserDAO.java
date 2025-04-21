@@ -1,6 +1,7 @@
 package com.example.tamagotchi.database;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -10,6 +11,7 @@ import com.example.tamagotchi.database.entities.User;
 
 import java.util.List;
 
+@Dao
 public interface UserDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... user);
@@ -26,6 +28,12 @@ public interface UserDAO {
     @Query("SELECT * FROM " + database.USER_TABLE+" WHERE username == :username")
     LiveData<User> getUserByName(String username);
 
-    @Query("SELECT * FROM " + database.USER_TABLE+" WHERE id == :userId")
+
+    @Query("SELECT * FROM " + database.USER_TABLE + " WHERE username = :username AND password = :password LIMIT 1")
+    User getUserByCredentials(String username, String password);
+
+    @Query("SELECT * FROM " + database.USER_TABLE + " WHERE id = :userId LIMIT 1")
     LiveData<User> getUserById(int userId);
+
+
 }

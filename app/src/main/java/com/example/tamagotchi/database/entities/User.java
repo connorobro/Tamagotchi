@@ -5,13 +5,25 @@ import androidx.room.PrimaryKey;
 
 import com.example.tamagotchi.database.database;
 
-@Entity(tableName= database.USER_TABLE)
+@Entity(tableName = database.USER_TABLE)
 public class User {
+
     @PrimaryKey(autoGenerate = true)
     private int id;
+
     private String username;
     private String password;
     private boolean isAdmin;
+
+    public User() {
+    }
+
+    public User(String username, String password, boolean isAdmin) {
+        this.username = username;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
+
     public int getId() {
         return id;
     }
@@ -40,13 +52,7 @@ public class User {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
-    public User(String username, String password, boolean ad) {
-        this.username = username;
-        this.password = password;
-        isAdmin = ad;
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

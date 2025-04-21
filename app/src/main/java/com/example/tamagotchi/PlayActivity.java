@@ -1,9 +1,12 @@
+
+/*
+
 package com.example.tamagotchi;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MiniGameActivity extends AppCompatActivity {
+public class PlayActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,4 +16,4 @@ public class MiniGameActivity extends AppCompatActivity {
         // TODO: Initialize game logic
     }
 }
-
+*/
