@@ -16,11 +16,4 @@
         android:textStyle="bold"
         android:background="#EEEEEE" />
 
-    <!-- Game area -->
-    <com.yourpackage.name.GameView
-        android:id="@+id/gameView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/minigameHeader" />
-
 </RelativeLayout>
