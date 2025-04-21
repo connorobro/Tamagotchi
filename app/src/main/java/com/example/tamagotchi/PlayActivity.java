@@ -1,4 +1,6 @@
+
 /*
+
 package com.example.tamagotchi;
 
 import android.os.Bundle;
