@@ -24,6 +24,9 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    public User(String username, String password) {
+    }
+
     public int getId() {
         return id;
     }

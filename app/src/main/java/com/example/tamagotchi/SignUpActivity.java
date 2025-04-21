@@ -10,82 +10,55 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 
-import com.example.tamagotchi.database.repository;
 import com.example.tamagotchi.database.entities.User;
-import com.example.tamagotchi.databinding.ActivityLoginBinding;
-import com.example.tamagotchi.SignUpActivity;
+import com.example.tamagotchi.databinding.ActivitySignupBinding;
 
-
-public class LoginActivity extends AppCompatActivity {
-
-    private ActivityLoginBinding binding;
-    private repository repository;
-
+public class SignUpActivity extends AppCompatActivity {
+    private com.example.tamagotchi.database.repository repository;
+    private ActivitySignupBinding binding;
     public static final String SHARED_PREFERENCE_FILE_KEY = "com.example.tamagotchi.PREFERENCE_FILE_KEY";
     public static final String SHARED_PREFERENCE_USERID_KEY = "com.example.tamagotchi.PREFERENCE_USERID_KEY";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        binding = ActivitySignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        // Correct repository reference with lowercase 'r'
         repository = repository.getRepository(getApplication());
-
-        // Setup the login button
-        binding.loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                verifyUser();
-            }
-        });
         binding.signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new SignUpActivity();
-
+                signupUser();
             }
         });
     }
-
-    private void verifyUser() {
+    private void signupUser(){
         String username = binding.userNameEditText.getText().toString();
-        if (username.isEmpty()) {
-            toastMaker("Username should not be blank");
+        String password = binding.passwordSignUpEditText.getText().toString();
+        if (username.isEmpty() || password.isEmpty()) {
+            toastMaker("Username and password  not be blank");
             return;
         }
-
-        // Fetch the user by username and observe the result
         LiveData<User> userObserver = repository.getUserByUserName(username);
         userObserver.observe(this, user -> {
             if (user != null) {
-                String password = binding.passwordLoginEditText.getText().toString();
-                if (password.equals(user.getPassword())) {
-                    // Store the user ID in SharedPreferences
+                toastMaker("error");
+                } else {
+                    User otheruser = new User(username, password);
+                    repository.getUserById(otheruser.getId());
                     SharedPreferences preferences = getApplicationContext()
                             .getSharedPreferences(SHARED_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
                     preferences.edit().putInt(SHARED_PREFERENCE_USERID_KEY, user.getId()).apply();
-
                     // Start MainActivity and pass the user ID
                     startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
                     finish();
-                } else {
-                    toastMaker("Invalid password");
-                    binding.passwordLoginEditText.setSelection(0);
                 }
-            } else {
-                toastMaker(String.format("%s is not a valid username.", username));
-                binding.userNameEditText.setSelection(0);
-            }
         });
     }
-
     private void toastMaker(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
-    public static Intent loginIntentFactory(Context context) {
-        return new Intent(context, LoginActivity.class);
+    public static Intent signUpIntentFactory(Context context) {
+        return new Intent(context, SignUpActivity.class);
     }
 }
+
