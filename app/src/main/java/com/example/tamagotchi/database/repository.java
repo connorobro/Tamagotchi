@@ -11,7 +11,7 @@ import java.util.List;
 public class repository {
 
     private static repository instance;
-    private final UserDAO userDAO;
+    private final com.example.tamagotchi.database.userDAO userDAO;
 
     private repository(Application application) {
         database db = database.getInstance(application);

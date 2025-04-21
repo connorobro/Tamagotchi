@@ -10,9 +10,9 @@ import androidx.room.Query;
 import com.example.tamagotchi.database.entities.User;
 
 import java.util.List;
-
+//changed dao name
 @Dao
-public interface UserDAO {
+public interface userDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(User... user);
 
