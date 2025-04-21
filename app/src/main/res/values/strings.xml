@@ -5,4 +5,8 @@
     <string name="enter_password">Enter password</string>
     <string name="welcome_to_tamagotchi">Welcome to tamagotchi</string>
     <string name="enter_username">Enter username</string>
+    <string name="logged_in">LOGGED IN</string>
+    <string name="logout">Logout</string>
+    <string name="cancel">Cancel</string>
+
 </resources>
