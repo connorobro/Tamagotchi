@@ -17,6 +17,8 @@ import java.util.concurrent.Executors;
 @Database(entities = {User.class}, version =1, exportSchema = false)
 public abstract class database extends RoomDatabase {
     public static final String USER_TABLE ="usertable" ;
+
+    public static final String PET_TABLE ="pettable";
     private static final String DATABASE_NAME="Tamagotchi";
 
     private static volatile database INSTANCE;
