@@ -14,6 +14,8 @@ public class Pet {
 
     private String species;
 
+    public Pet(){}
+
     public Pet(String name, String species) {
         this.name = name;
         this.species = species;
