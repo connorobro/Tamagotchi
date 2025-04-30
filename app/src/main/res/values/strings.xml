@@ -10,6 +10,10 @@
     <string name="cancel">Cancel</string>
     <string name="sign_up">Sign Up</string>
     <string name="submit">submit</string>
+
+    <string name="play_game" />
+
     <string name="play_game">Play Game</string>
+
 
 </resources>
