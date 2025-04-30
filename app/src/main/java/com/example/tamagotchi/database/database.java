@@ -1,0 +1,77 @@
+package com.example.tamagotchi.database;
+
+import android.content.Context;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import com.example.tamagotchi.database.entities.Pet;
+import com.example.tamagotchi.database.entities.User;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+@Database(entities = {User.class, Pet.class}, version =2, exportSchema = false)
+public abstract class database extends RoomDatabase {
+    public static final String USER_TABLE ="usertable" ;
+
+    public static final String PET_TABLE ="pettable";
+    private static final String DATABASE_NAME="Tamagotchi";
+
+    private static volatile database INSTANCE;
+
+    private static final int NUMBER_OF_THREADS=4;
+    public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    //Once the addDefault values is added this should work
+
+    public static database getInstance(final Context context) {
+        if (INSTANCE == null) {
+            synchronized (database.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(
+                                    context.getApplicationContext(),
+                                    database.class,
+                                    DATABASE_NAME)
+                            .fallbackToDestructiveMigration() // wipes data if migration not found
+                            .addCallback(databaseCallback) // use this to pre-populate if needed
+                            .build();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+
+
+    private static final RoomDatabase.Callback databaseCallback =
+            new RoomDatabase.Callback() {
+                @Override
+                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                    super.onCreate(db);
+                    databaseWriteExecutor.execute(() -> {
+                        userDAO dao = INSTANCE.userDAO();
+                        petDAO pet = INSTANCE.petDAO();
+                        pet.deleteAll();
+                        dao.deleteAll();
+                        User admin = new User("admin", "admin", true);
+                        dao.insert(admin);
+                        User testUser = new User("testUser", "testUser",false);
+                        dao.insert(testUser);
+                        Pet dog = new Pet("Rob", "Dog");
+                        Pet cat = new Pet("Bob","Cat");
+                        pet.insert(dog);
+                        pet.insert(cat);
+
+                        Log.d("DB", "Database created. You can add default users here.");
+                    });
+                }
+            };
+
+
+    public abstract userDAO userDAO();
+
+    public abstract petDAO petDAO();
+}

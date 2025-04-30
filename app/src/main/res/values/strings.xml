@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Tamagotchi</string>
+    <string name="welcome_back_to_tamagotchi">Welcome back to Tamagotchi</string>
+    <string name="login">login</string>
+    <string name="enter_password">Enter password</string>
+    <string name="welcome_to_tamagotchi">Welcome to tamagotchi</string>
+    <string name="enter_username">Enter username</string>
+    <string name="logged_in">LOGGED IN</string>
+    <string name="logout">Logout</string>
+    <string name="cancel">Cancel</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="submit">submit</string>
+
 </resources>

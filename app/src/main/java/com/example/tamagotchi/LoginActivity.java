@@ -1,0 +1,91 @@
+package com.example.tamagotchi;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+
+import com.example.tamagotchi.database.repository;
+import com.example.tamagotchi.database.entities.User;
+import com.example.tamagotchi.databinding.ActivityLoginBinding;
+import com.example.tamagotchi.SignUpActivity;
+
+
+public class LoginActivity extends AppCompatActivity {
+
+    private ActivityLoginBinding binding;
+    private repository repository;
+
+    public static final String SHARED_PREFERENCE_FILE_KEY = "com.example.tamagotchi.PREFERENCE_FILE_KEY";
+    public static final String SHARED_PREFERENCE_USERID_KEY = "com.example.tamagotchi.PREFERENCE_USERID_KEY";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        // Correct repository reference with lowercase 'r'
+        repository = repository.getRepository(getApplication());
+
+        // Setup the login button
+        binding.loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verifyUser();
+            }
+        });
+        binding.signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new SignUpActivity();
+
+            }
+        });
+    }
+
+    private void verifyUser() {
+        String username = binding.userNameEditText.getText().toString();
+        if (username.isEmpty()) {
+            toastMaker("Username should not be blank");
+            return;
+        }
+
+        // Fetch the user by username and observe the result
+        LiveData<User> userObserver = repository.getUserByUserName(username);
+        userObserver.observe(this, user -> {
+            if (user != null) {
+                String password = binding.passwordLoginEditText.getText().toString();
+                if (password.equals(user.getPassword())) {
+                    // Store the user ID in SharedPreferences
+                    SharedPreferences preferences = getApplicationContext()
+                            .getSharedPreferences(SHARED_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+                    preferences.edit().putInt(SHARED_PREFERENCE_USERID_KEY, user.getId()).apply();
+
+                    // Start MainActivity and pass the user ID
+                    startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
+                    finish();
+                } else {
+                    toastMaker("Invalid password");
+                    binding.passwordLoginEditText.setSelection(0);
+                }
+            } else {
+                toastMaker(String.format("%s is not a valid username.", username));
+                binding.userNameEditText.setSelection(0);
+            }
+        });
+    }
+
+    private void toastMaker(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static Intent loginIntentFactory(Context context) {
+        return new Intent(context, LoginActivity.class);
+    }
+}
