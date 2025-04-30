@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private repository repository;
     private int loggedInUserId = LOGGED_OUT;
     private User user;
+
+
 // admin button
     @Override
     protected void onCreate(Bundle savedInstanceState) {
