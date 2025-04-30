@@ -33,8 +33,11 @@ import androidx.lifecycle.LiveData;
 import com.example.tamagotchi.database.repository;
 import com.example.tamagotchi.database.entities.User;
 import com.example.tamagotchi.databinding.ActivityMainBinding;
+import com.example.tamagotchi.minigame.MinigameActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int REQUEST_MINIGAME = 2001;
 
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.tamagotchi.USER_ID_KEY";
     public static final String SHARED_PREFERENCE_FILE_KEY = "com.example.tamagotchi.PREFERENCE_FILE_KEY";
@@ -171,5 +174,28 @@ public class MainActivity extends AppCompatActivity {
     public static Intent signUpIntentFactory(Context context) {
         return new Intent(context, SignUpActivity.class);
     }
+
+    /** Launches the embedded minigame */
+    private void launchMinigame() {
+        Intent i = new Intent(this, MinigameActivity.class);
+        startActivityForResult(i, REQUEST_MINIGAME);
+    }
+
+    /** If you need to forcibly close it from here */
+    private void closeMinigame() {
+        finishActivity(REQUEST_MINIGAME);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_MINIGAME && resultCode == RESULT_OK && data != null) {
+            int foodGained = data.getIntExtra("score", 0);
+            // e.g. add it to your Tamagotchi’s hunger meter:
+            binding.titleText.setText("You fetched " + foodGained + " food!");
+        }
+    }
+
+
 
 }
