@@ -38,20 +38,37 @@ public class SignUpActivity extends AppCompatActivity {
             toastMaker("Username and password  not be blank");
             return;
         }
-        LiveData<User> userObserver = repository.getUserByUserName(username);
-        userObserver.observe(this, user -> {
-            if (user != null) {
-                toastMaker("error");
-                } else {
-                    User otheruser = new User(username, password);
-                    repository.getUserById(otheruser.getId());
-                    SharedPreferences preferences = getApplicationContext()
-                            .getSharedPreferences(SHARED_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-                    preferences.edit().putInt(SHARED_PREFERENCE_USERID_KEY, user.getId()).apply();
-                    // Start MainActivity and pass the user ID
-                    startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
-                    finish();
-                }
+//        LiveData<User> userObserver = repository.getUserByUserName(username);
+//        userObserver.observe(this, user -> {
+//            if (user != null) {
+//                toastMaker("error");
+//                } else {
+//                    User otheruser = new User(username, password);
+//                    repository.getUserById(otheruser.getId());
+//                    SharedPreferences preferences = getApplicationContext()
+//                            .getSharedPreferences(SHARED_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+//                    preferences.edit().putInt(SHARED_PREFERENCE_USERID_KEY, user.getId()).apply();
+//                    // Start MainActivity and pass the user ID
+//                    startActivity(MainActivity.mainActivityIntentFactory(getApplicationContext(), user.getId()));
+//                    finish();
+//                }
+//        });
+
+
+
+        repository.getUserByUserName(username).observe(this, user -> {
+            if(user != null){
+                toastMaker("username already exists");
+            }
+            else{
+                User newuser = new User (username, password, false);
+                repository.insert(newuser);
+                toastMaker("User has been created and added to database");
+                Intent newIntent = loginIntentFactory(getApplicationContext());
+                startActivity(newIntent);
+
+
+            }
         });
     }
     private void toastMaker(String message) {
@@ -59,6 +76,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
     public static Intent signUpIntentFactory(Context context) {
         return new Intent(context, SignUpActivity.class);
+    }
+    public static Intent loginIntentFactory(Context context){
+        return new Intent(context, LoginActivity.class);
     }
 }
 
