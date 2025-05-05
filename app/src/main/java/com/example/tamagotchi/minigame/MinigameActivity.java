@@ -18,7 +18,6 @@ public class MinigameActivity extends AppCompatActivity {
     }
     @Override
     protected void onResume(){
-
         super.onResume();
 
     }

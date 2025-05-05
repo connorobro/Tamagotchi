@@ -6,10 +6,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class SignUpActivityTest {
+public class LoginActivityTest {
 
     @Before
     public void setUp() throws Exception {
+
     }
 
     @After
@@ -17,10 +18,11 @@ public class SignUpActivityTest {
     }
 
     @Test
-    public void signUpIntentFactory() {
+    public void loginIntentFactory() {
     }
 
     @Test
-    public void loginIntentFactory() {
+    public void signUpIntent() {
+
     }
 }
