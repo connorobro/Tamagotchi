@@ -23,6 +23,7 @@
         android:text="@string/welcome_to_tamagotchi"
         android:textSize="32sp"
         android:gravity="center"
+        android:paddingTop="10dp"
         android:layout_marginTop="48dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

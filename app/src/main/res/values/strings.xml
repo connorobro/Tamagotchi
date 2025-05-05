@@ -20,4 +20,8 @@
     <string name="blue">Blue</string>
     <string name="red">Red</string>
 
+
+    <string name="play_game">Play Game</string>
+
+
 </resources>
