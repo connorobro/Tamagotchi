@@ -16,5 +16,8 @@
     <string name="enter_pet_color">Enter Pet Color</string>
     <string name="save_settings">Save Settings</string>
     <string name="play_game">Play game</string>
+    <string name="mini_game">Mini Game</string>
+    <string name="blue">Blue</string>
+    <string name="red">Red</string>
 
 </resources>
