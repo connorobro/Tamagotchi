@@ -26,3 +26,20 @@ public class MinigameTest {
             });
         }
     }
+
+    @Test
+    public void testCloseMinigame_noCrashes() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                try {
+                    Method close = MainActivity.class
+                            .getDeclaredMethod("closeMinigame");
+                    close.setAccessible(true);
+                    close.invoke(activity);
+                } catch (Exception e) {
+                    throw new AssertionError("closeMinigame() threw", e);
+                }
+            });
+        }
+    }
+}
