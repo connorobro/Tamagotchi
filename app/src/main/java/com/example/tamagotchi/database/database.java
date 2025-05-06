@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.tamagotchi.database.entities.Pet;
@@ -15,18 +16,25 @@ import com.example.tamagotchi.database.entities.User;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class, Pet.class}, version =2, exportSchema = false)
+@Database(entities = {User.class, Pet.class}, version = 3, exportSchema = false)
 public abstract class database extends RoomDatabase {
-    public static final String USER_TABLE ="usertable" ;
-
-    public static final String PET_TABLE ="pettable";
-    private static final String DATABASE_NAME="Tamagotchi";
+    public static final String USER_TABLE = "usertable";
+    public static final String PET_TABLE  = "pettable";
+    private static final String DATABASE_NAME = "Tamagotchi";
 
     private static volatile database INSTANCE;
+    private static final int NUMBER_OF_THREADS = 4;
+    public static final ExecutorService databaseWriteExecutor =
+            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    private static final int NUMBER_OF_THREADS=4;
-    public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-    //Once the addDefault values is added this should work
+    // carlos I did this to add food column without wiping existing data
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase db) {
+            db.execSQL("ALTER TABLE " + USER_TABLE +
+                    " ADD COLUMN food INTEGER NOT NULL DEFAULT 0");
+        }
+    };
 
     public static database getInstance(final Context context) {
         if (INSTANCE == null) {
@@ -36,15 +44,15 @@ public abstract class database extends RoomDatabase {
                                     context.getApplicationContext(),
                                     database.class,
                                     DATABASE_NAME)
-                            .fallbackToDestructiveMigration() // wipes data if migration not found
-                            .addCallback(databaseCallback) // use this to pre-populate if needed
+                            .addMigrations(MIGRATION_2_3)
+                            .fallbackToDestructiveMigration()
+                            .addCallback(databaseCallback)
                             .build();
                 }
             }
         }
         return INSTANCE;
     }
-
 
     private static final RoomDatabase.Callback databaseCallback =
             new RoomDatabase.Callback() {
@@ -53,25 +61,28 @@ public abstract class database extends RoomDatabase {
                     super.onCreate(db);
                     databaseWriteExecutor.execute(() -> {
                         userDAO dao = INSTANCE.userDAO();
-                        petDAO pet = INSTANCE.petDAO();
-                        pet.deleteAll();
+                        petDAO petDao = INSTANCE.petDAO();
+
+                        petDao.deleteAll();
                         dao.deleteAll();
+
+                        // Seed users with starting food = 20
                         User admin = new User("admin", "admin", true);
                         dao.insert(admin);
-                        User testUser = new User("testUser", "testUser",false);
+                        User testUser = new User("testUser", "testUser", false);
                         dao.insert(testUser);
-                        Pet dog = new Pet("Rob", "Dog");
-                        Pet cat = new Pet("Bob","Cat");
-                        pet.insert(dog);
-                        pet.insert(cat);
 
-                        Log.d("DB", "Database created. You can add default users here.");
+                        // Seed pets
+                        Pet dog = new Pet("Rob", "Dog");
+                        Pet cat = new Pet("Bob", "Cat");
+                        petDao.insert(dog);
+                        petDao.insert(cat);
+
+                        Log.d("DB", "Database created with default users and food.");
                     });
                 }
             };
 
-
     public abstract userDAO userDAO();
-
     public abstract petDAO petDAO();
 }

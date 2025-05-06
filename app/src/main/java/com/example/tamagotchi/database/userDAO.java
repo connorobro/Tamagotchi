@@ -6,6 +6,7 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.tamagotchi.database.entities.User;
 
@@ -14,7 +15,10 @@ import java.util.List;
 @Dao
 public interface userDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(User... user);
+    void insert(User... users);
+
+    @Update
+    void update(User user);
 
     @Delete
     void delete(User user);
