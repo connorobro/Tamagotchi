@@ -71,7 +71,18 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        int savedColor = prefs.getInt("backgroundColor", Color.WHITE);
+        binding.getRoot().setBackgroundColor(savedColor);
+
         binding.minigameButton.setOnClickListener(v -> launchMinigame());
+
+        binding.environmentSettingsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, EnvironmentSettingsActivity.class);
+            startActivity(intent);
+        });
+
+
 
         updateUI();
     }
