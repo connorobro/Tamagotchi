@@ -10,5 +10,19 @@
     <string name="cancel">Cancel</string>
     <string name="sign_up">Sign Up</string>
     <string name="submit">submit</string>
+    <string name="edit_pet_settings">Edit Pet Settings</string>
+    <string name="enter_pet_name">Enter Pet Name</string>
+    <string name="enter_pet_type">Enter Pet Type</string>
+    <string name="enter_pet_color">Enter Pet Color</string>
+    <string name="save_settings">Save Settings</string>
+    <string name="play_game">Play game</string>
+    <string name="mini_game">Mini Game</string>
+    <string name="blue">Blue</string>
+    <string name="red">Red</string>
+
+
+    <string name="play_game">Play Game</string>
+    <string name="admin_panel">Admin Panel</string>
+
 
 </resources>

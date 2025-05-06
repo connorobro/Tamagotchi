@@ -9,14 +9,17 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.tamagotchi.database.entities.Pet;
 import com.example.tamagotchi.database.entities.User;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {User.class}, version =1, exportSchema = false)
+@Database(entities = {User.class, Pet.class}, version =2, exportSchema = false)
 public abstract class database extends RoomDatabase {
     public static final String USER_TABLE ="usertable" ;
+
+    public static final String PET_TABLE ="pettable";
     private static final String DATABASE_NAME="Tamagotchi";
 
     private static volatile database INSTANCE;
@@ -50,11 +53,18 @@ public abstract class database extends RoomDatabase {
                     super.onCreate(db);
                     databaseWriteExecutor.execute(() -> {
                         userDAO dao = INSTANCE.userDAO();
+                        petDAO pet = INSTANCE.petDAO();
+                        pet.deleteAll();
                         dao.deleteAll();
                         User admin = new User("admin", "admin", true);
                         dao.insert(admin);
                         User testUser = new User("testUser", "testUser",false);
                         dao.insert(testUser);
+                        Pet dog = new Pet("Rob", "Dog");
+                        Pet cat = new Pet("Bob","Cat");
+                        pet.insert(dog);
+                        pet.insert(cat);
+
                         Log.d("DB", "Database created. You can add default users here.");
                     });
                 }
@@ -63,4 +73,5 @@ public abstract class database extends RoomDatabase {
 
     public abstract userDAO userDAO();
 
+    public abstract petDAO petDAO();
 }
