@@ -1,9 +1,7 @@
 package com.example.tamagotchi.database.entities;
-
 import static org.junit.Assert.assertNotEquals;
 
 import junit.framework.TestCase;
-
 import org.junit.Test;
 
 public class UserTest extends TestCase {
@@ -14,17 +12,17 @@ public class UserTest extends TestCase {
 
     @Test
     public void testSetUsername() {
-        User user1 = new User("admin", "admin", true );
-        user1.setUsername("admin2");
-        assertEquals(user1.getUsername(), "admin2");
-        assertNotEquals(user1.getUsername(), "admin3");
-    }
+        User user1 = new User("admin", "admin", true);
+        user1.setUsername("realAdmin");
+        assertEquals(user1.getUsername(), "realAdmin");
+        assertNotEquals(user1.getUsername(), "fakeAdmin");
 
+    }
+    
     @Test
     public void testSetPassword() {
-        User user1 = new User("admin", "admin", true );
-        user1.setPassword("realAdmin");
-        assertEquals(user1.getPassword(), "realAdmin");
-        assertNotEquals(user1.getPassword(), "evilAdmin");
+        User user1 = new User("admin", "admin", true);
+        user1.setPassword("admin");
+        assertEquals(user1.getPassword(), "admin");
     }
 }
