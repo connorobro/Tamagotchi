@@ -1,4 +1,5 @@
 package com.example.tamagotchi;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -37,6 +38,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         });
         saveButton.setOnClickListener(view -> {
+            SharedPreferences sharedPref = getSharedPreferences("colorsetting", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("petcolor","red");
+            editor.apply();
+            finish();
 
         });
     }
