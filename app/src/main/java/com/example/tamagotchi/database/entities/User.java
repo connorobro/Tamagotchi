@@ -14,14 +14,17 @@ public class User {
     private String username;
     private String password;
     private boolean isAdmin;
+    private int food;
 
     public User() {
+        this.food = 0;
     }
 
     public User(String username, String password, boolean isAdmin) {
         this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
+        this.food = 0;
     }
 
 //    public User(String username, String password) {
@@ -57,5 +60,13 @@ public class User {
 
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    public int getFood() {
+        return food;
+    }
+
+    public void setFood(int food) {
+        this.food = food;
     }
 }
