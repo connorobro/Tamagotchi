@@ -51,6 +51,22 @@ public class MinigameActivity extends AppCompatActivity {
                         LayoutParams.WRAP_CONTENT
                 ));
 
+        // Exit button
+        TextView exitButton = new TextView(this);
+        exitButton.setText("Exit Game");
+        exitButton.setTextSize(18);
+        exitButton.setTextColor(Color.WHITE);
+        exitButton.setPadding(16, 16, 16, 16);
+        exitButton.setBackgroundColor(Color.RED);
+        exitButton.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        exitButton.setOnClickListener(v -> exitWithResult());
+
+        root.addView(exitButton,
+                new LinearLayout.LayoutParams(
+                        LayoutParams.MATCH_PARENT,
+                        LayoutParams.WRAP_CONTENT
+                ));
+
         // Grid of holes
         GridLayout grid = new GridLayout(this);
         grid.setRowCount(5);
