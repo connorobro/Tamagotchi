@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -70,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+        binding.settingsbutton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        });
 
         SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         int savedColor = prefs.getInt("backgroundColor", Color.WHITE);
@@ -208,6 +213,20 @@ public class MainActivity extends AppCompatActivity {
             // e.g. add it to your Tamagotchi’s hunger meter:
             binding.titleText.setText("You fetched " + foodGained + " food!");
         }
+    }
+    protected void onResume(){
+        super.onResume();
+        SharedPreferences sharedPref = getSharedPreferences("colorsetting", MODE_PRIVATE);
+        String color= sharedPref.getString("petcolor", "");
+        ImageView petimage = findViewById(R.id.imageView2);
+        if(color.equals("red")){
+            petimage.setColorFilter(Color.RED);
+        }else if(color.equals("blue")){
+            petimage.setColorFilter(Color.BLUE);
+        }else{
+
+        }
+
     }
 
 
