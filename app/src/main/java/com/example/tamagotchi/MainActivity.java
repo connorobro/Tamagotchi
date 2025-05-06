@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        binding.minigameButton.setOnClickListener(v -> launchMinigame());
+
         updateUI();
     }
 
