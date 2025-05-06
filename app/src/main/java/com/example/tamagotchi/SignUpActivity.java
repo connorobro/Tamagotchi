@@ -62,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
             else{
                 User newuser = new User (username, password, false);
-                repository.insert(newuser);
+                repository.insertUsers(newuser);
                 toastMaker("User has been created and added to database");
                 Intent newIntent = loginIntentFactory(getApplicationContext());
                 startActivity(newIntent);
