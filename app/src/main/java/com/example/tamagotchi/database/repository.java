@@ -13,13 +13,13 @@ public class repository {
 
     private static repository instance;
 
-    private final petDAO petDAO;
-    private final com.example.tamagotchi.database.userDAO userDAO;
+    private final userDAO userDao;
+    private final petDAO petDao;
 
     private repository(Application application) {
         database db = database.getInstance(application);
-        userDAO = db.userDAO();
-        petDAO = db.petDAO();
+        userDao = db.userDAO();
+        petDao = db.petDAO();
     }
 
     public static synchronized repository getRepository(Application application) {
@@ -29,48 +29,53 @@ public class repository {
         return instance;
     }
 
-
+    // User operations
     public LiveData<List<User>> getAllUsers() {
-        return userDAO.getAllUsers();
+        return userDao.getAllUsers();
     }
 
     public LiveData<User> getUserByUserName(String username) {
-        return userDAO.getUserByName(username);
+        return userDao.getUserByName(username);
     }
 
     public LiveData<User> getUserById(int userId) {
-        return userDAO.getUserById(userId);
+        return userDao.getUserById(userId);
     }
 
-    public void insert(User... users) {
-        database.databaseWriteExecutor.execute(() -> userDAO.insert(users));
+    public void insertUsers(User... users) {
+        database.databaseWriteExecutor.execute(() -> userDao.insert(users));
     }
 
-    public void delete(User user) {
-        database.databaseWriteExecutor.execute(() -> userDAO.delete(user));
+    public void updateUser(User user) {
+        database.databaseWriteExecutor.execute(() -> userDao.update(user));
     }
+
+    public void deleteUser(User user) {
+        database.databaseWriteExecutor.execute(() -> userDao.delete(user));
+    }
+
+    // Pet operations
     public LiveData<List<Pet>> getAllPets() {
-        return petDAO.getAllPets();
+        return petDao.getAllPets();
     }
 
     public LiveData<Pet> getPetById(int petId) {
-        return petDAO.getPetById(petId);
+        return petDao.getPetById(petId);
     }
 
     public LiveData<Pet> getPetByName(String name) {
-        return petDAO.getPetByName(name);
+        return petDao.getPetByName(name);
     }
 
     public void insertPets(Pet... pets) {
-        database.databaseWriteExecutor.execute(() -> petDAO.insert(pets));
+        database.databaseWriteExecutor.execute(() -> petDao.insert(pets));
     }
 
     public void deletePet(Pet pet) {
-        database.databaseWriteExecutor.execute(() -> petDAO.delete(pet));
+        database.databaseWriteExecutor.execute(() -> petDao.delete(pet));
     }
 
     public void deleteAllPets() {
-        database.databaseWriteExecutor.execute(petDAO::deleteAll);
+        database.databaseWriteExecutor.execute(petDao::deleteAll);
     }
-
 }
