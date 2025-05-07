@@ -82,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
         binding.minigameButton.setOnClickListener(v -> launchMinigame());
 
-        binding.environmentSettingsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, EnvironmentSettingsActivity.class);
+        binding.settingsbutton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         });
 

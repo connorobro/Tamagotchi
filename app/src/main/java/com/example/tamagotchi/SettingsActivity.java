@@ -24,17 +24,17 @@ public class SettingsActivity extends AppCompatActivity {
         Button saveButton = findViewById(R.id.settingButton);
         redButton.setOnClickListener(view -> {
 
-            if(Objects.equals(choice, "red")){
+
                 choice = "red";
                imageView.setColorFilter(Color.RED);
-            }
+
 
         });
         blueButton.setOnClickListener(view -> {
-            if(Objects.equals(choice, "blue")){
+
                 choice = "blue";
                 imageView.setColorFilter(Color.BLUE);
-            }
+
 
         });
         saveButton.setOnClickListener(view -> {
