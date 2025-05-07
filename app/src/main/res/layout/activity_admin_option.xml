@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/petNameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/pet_name"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/petSpeciesInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/pet_species"
+        android:minHeight="48dp" />
+
+    <Button
+        android:id="@+id/confirmAddPetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_pet"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Add a Nevermind button -->
+    <Button
+        android:id="@+id/nevermindButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nevermind"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

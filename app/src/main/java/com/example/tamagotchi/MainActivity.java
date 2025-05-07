@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 if (user.isAdmin()) {
                     binding.adminButton.setVisibility(View.VISIBLE);
                     binding.adminButton.setOnClickListener(v -> {
-                        //startActivity(new Intent(this, AdminActivity.class)); This will start up a new screen activity if we need one.
+                        startActivity(new Intent(this, admin_option.class)); // This will start up a new screen activity if we need one.
                     });
                 } else {
                     binding.adminButton.setVisibility(View.GONE);
