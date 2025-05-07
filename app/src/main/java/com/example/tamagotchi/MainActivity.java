@@ -76,9 +76,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-        int savedColor = prefs.getInt("backgroundColor", Color.WHITE);
-        binding.getRoot().setBackgroundColor(savedColor);
 
         binding.minigameButton.setOnClickListener(v -> launchMinigame());
 
