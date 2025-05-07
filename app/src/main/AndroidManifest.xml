@@ -16,6 +16,12 @@
             android:name=".SignUpActivity"
              />
         <activity
+            android:name=".SettingsActivity"
+            />
+        <activity
+            android:name=".EnvironmentSettingsActivity"
+            />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity

@@ -92,6 +92,22 @@ public class MainActivity extends AppCompatActivity {
         updateUI();
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        SharedPreferences sharedPref = getSharedPreferences("colorsetting", MODE_PRIVATE);
+        String color= sharedPref.getString("petcolor", "");
+        ImageView petimage = findViewById(R.id.imageView2);
+        if(color.equals("red")){
+            petimage.setColorFilter(Color.RED);
+        }else if(color.equals("blue")){
+            petimage.setColorFilter(Color.BLUE);
+        }else{
+            petimage.clearColorFilter();
+        }
+
+    }
+
     private void loginUser(Bundle savedInstanceState) {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_KEY, LOGGED_OUT);
@@ -213,20 +229,6 @@ public class MainActivity extends AppCompatActivity {
             // e.g. add it to your Tamagotchi’s hunger meter:
             binding.titleText.setText("You fetched " + foodGained + " food!");
         }
-    }
-    protected void onResume(){
-        super.onResume();
-        SharedPreferences sharedPref = getSharedPreferences("colorsetting", MODE_PRIVATE);
-        String color= sharedPref.getString("petcolor", "");
-        ImageView petimage = findViewById(R.id.imageView2);
-        if(color.equals("red")){
-            petimage.setColorFilter(Color.RED);
-        }else if(color.equals("blue")){
-            petimage.setColorFilter(Color.BLUE);
-        }else{
-
-        }
-
     }
 
 
