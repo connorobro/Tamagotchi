@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
         binding.minigameButton.setOnClickListener(v -> launchMinigame());
 
         binding.settingsbutton.setOnClickListener(v -> {
@@ -226,6 +225,15 @@ public class MainActivity extends AppCompatActivity {
             // e.g. add it to your Tamagotchi’s hunger meter:
             binding.titleText.setText("You fetched " + foodGained + " food!");
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        int savedColor = prefs.getInt("backgroundColor", Color.WHITE);
+        binding.getRoot().setBackgroundColor(savedColor);
     }
 
 
