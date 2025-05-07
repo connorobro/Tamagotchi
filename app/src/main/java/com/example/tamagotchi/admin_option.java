@@ -44,7 +44,7 @@ public class admin_option extends AppCompatActivity {
 
         // Handle the "Nevermind" button click to go back to the previous screen
         nevermindButton.setOnClickListener(v -> {
-            finish();  // Close this activity and return to the previous activity
+            finish();
         });
     }
 }
