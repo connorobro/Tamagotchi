@@ -15,7 +15,7 @@ import java.util.List;
 @Dao
 public interface petDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Pet... pet);
+    void insert(Pet pet);
 
     @Delete
     void delete(Pet pet);

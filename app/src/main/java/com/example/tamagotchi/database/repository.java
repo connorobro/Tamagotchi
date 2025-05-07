@@ -67,8 +67,8 @@ public class repository {
         return petDao.getPetByName(name);
     }
 
-    public void insertPets(Pet... pets) {
-        database.databaseWriteExecutor.execute(() -> petDao.insert(pets));
+    public void insertPet(Pet pet) {
+        database.databaseWriteExecutor.execute(() -> petDao.insert(pet));
     }
 
     public void deletePet(Pet pet) {

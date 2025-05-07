@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tamagotchi.database.repository;
 
 import java.util.Objects;
+//This is a comment to force a commit
 
 //source https://developer.android.com/guide/components/activities/activity-lifecycle
 public class SettingsActivity extends AppCompatActivity {
