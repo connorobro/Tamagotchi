@@ -29,7 +29,6 @@ public class EnvironmentSettingsActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
         int savedColor = prefs.getInt("backgroundColor", Color.WHITE);
 
-        // Find the current index of the saved color
         final int[] currentColorIndex = {0};
         for (int i = 0; i < colors.length; i++) {
             if (colors[i] == savedColor) {
@@ -38,7 +37,6 @@ public class EnvironmentSettingsActivity extends AppCompatActivity {
             }
         }
 
-        // Set initial background color
         layout.setBackgroundColor(colors[currentColorIndex[0]]);
 
         changeBackgroundButton.setOnClickListener(v -> {

@@ -84,6 +84,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        binding.environmentSettingsButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, EnvironmentSettingsActivity.class);
+            startActivity(intent);
+        });
+
 
 
         updateUI();
