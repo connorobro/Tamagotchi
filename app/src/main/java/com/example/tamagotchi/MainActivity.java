@@ -92,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        int savedColor = prefs.getInt("backgroundColor", Color.WHITE);
+        binding.getRoot().setBackgroundColor(savedColor);
+
+
         SharedPreferences sharedPref = getSharedPreferences("colorsetting", MODE_PRIVATE);
         String color= sharedPref.getString("petcolor", "");
         ImageView petimage = findViewById(R.id.imageView2);
@@ -226,15 +232,6 @@ public class MainActivity extends AppCompatActivity {
             // e.g. add it to your Tamagotchi’s hunger meter:
             binding.titleText.setText("You fetched " + foodGained + " food!");
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-        int savedColor = prefs.getInt("backgroundColor", Color.WHITE);
-        binding.getRoot().setBackgroundColor(savedColor);
     }
 
 
