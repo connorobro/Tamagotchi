@@ -1,4 +1,5 @@
 package com.example.tamagotchi;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tamagotchi.database.repository;
 
 import java.util.Objects;
+//This is a comment to force a commit
 
 //source https://developer.android.com/guide/components/activities/activity-lifecycle
 public class SettingsActivity extends AppCompatActivity {
@@ -23,20 +25,25 @@ public class SettingsActivity extends AppCompatActivity {
         Button saveButton = findViewById(R.id.settingButton);
         redButton.setOnClickListener(view -> {
 
-            if(Objects.equals(choice, "red")){
+
                 choice = "red";
                imageView.setColorFilter(Color.RED);
-            }
+
 
         });
         blueButton.setOnClickListener(view -> {
-            if(Objects.equals(choice, "blue")){
+
                 choice = "blue";
                 imageView.setColorFilter(Color.BLUE);
-            }
+
 
         });
         saveButton.setOnClickListener(view -> {
+            SharedPreferences sharedPref = getSharedPreferences("colorsetting", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("petcolor","red");
+            editor.apply();
+            finish();
 
         });
     }

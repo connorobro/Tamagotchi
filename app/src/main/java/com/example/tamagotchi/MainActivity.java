@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -70,17 +71,37 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+        binding.settingsbutton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        });
 
         binding.minigameButton.setOnClickListener(v -> launchMinigame());
 
-        binding.environmentSettingsButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, EnvironmentSettingsActivity.class);
+        binding.settingsbutton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
         });
 
 
 
         updateUI();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        SharedPreferences sharedPref = getSharedPreferences("colorsetting", MODE_PRIVATE);
+        String color= sharedPref.getString("petcolor", "");
+        ImageView petimage = findViewById(R.id.imageView2);
+        if(color.equals("red")){
+            petimage.setColorFilter(Color.RED);
+        }else if(color.equals("blue")){
+            petimage.setColorFilter(Color.BLUE);
+        }else{
+            petimage.clearColorFilter();
+        }
+
     }
 
     private void loginUser(Bundle savedInstanceState) {
@@ -107,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 if (user.isAdmin()) {
                     binding.adminButton.setVisibility(View.VISIBLE);
                     binding.adminButton.setOnClickListener(v -> {
-                        //startActivity(new Intent(this, AdminActivity.class)); This will start up a new screen activity if we need one.
+                        startActivity(new Intent(this, admin_option.class)); // This will start up a new screen activity if we need one.
                     });
                 } else {
                     binding.adminButton.setVisibility(View.GONE);

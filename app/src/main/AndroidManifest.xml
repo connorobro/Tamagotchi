@@ -13,14 +13,17 @@
         android:theme="@style/Theme.Tamagotchi"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpActivity"
-             />
+            android:name=".admin_option"
+            android:exported="false" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".EnvironmentSettingsActivity" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".minigame.MinigameActivity"
-            android:label="Whack-A-Mole"/>
+            android:label="Whack-A-Mole" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
