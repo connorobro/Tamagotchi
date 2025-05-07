@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
@@ -95,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
         String color= sharedPref.getString("petcolor", "");
         ImageView petimage = findViewById(R.id.imageView2);
         if(color.equals("red")){
-            petimage.setColorFilter(Color.RED);
+            petimage.setColorFilter(Color.RED, PorterDuff.Mode.OVERLAY);
         }else if(color.equals("blue")){
-            petimage.setColorFilter(Color.BLUE);
+            petimage.setColorFilter(Color.BLUE, PorterDuff.Mode.OVERLAY);
         }else{
             petimage.clearColorFilter();
         }

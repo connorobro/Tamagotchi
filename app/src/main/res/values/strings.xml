@@ -26,5 +26,13 @@
     <string name="pet_species">Pet Species</string>
     <string name="add_pet_">add Pet</string>
 
+    <string name="reset">Reset</string>
+    <string name="clear">Clear</string>
+
+    <string name="add_pet">Add Pet</string>
+    <string name="pet_name">Pet Name</string>
+    <string name="pet_species">Pet Species</string>
+    <string name="add_pet_">add Pet</string>
+
 
 </resources>
