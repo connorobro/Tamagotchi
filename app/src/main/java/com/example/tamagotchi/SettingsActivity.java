@@ -12,6 +12,9 @@ import com.example.tamagotchi.database.repository;
 import java.util.Objects;
 
 //source https://developer.android.com/guide/components/activities/activity-lifecycle
+//source https://developer.android.com/training/data-storage/shared-preferences
+//source https://stackoverflow.com/questions/57070806/set-color-filter-not-work-with-custom-color/57070887
+
 public class SettingsActivity extends AppCompatActivity {
     ImageView imageView;
     String choice = "";
