@@ -38,34 +38,43 @@
         android:src="@drawable/mouse"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleText"/>
+
+    <TextView
+        android:id="@+id/foodCountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="28dp"
+        android:text="Food: 0"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView2" />
+
     <Button
         android:id="@+id/settingsbutton"
         android:layout_width="103dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView2"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="4dp"
 
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="-295dp"
+        android:layout_marginTop="16dp"
         android:text="@string/edit_pet_settings"
         android:textSize="11sp"
-        app:layout_constraintTop_toBottomOf="@id/imageView2"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView2" />
 
     <Button
         android:id="@+id/adminButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:text="@string/admin_panel"
         android:visibility="invisible"
-        tools:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/titleText"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/minigameButton"
@@ -81,22 +90,22 @@
         android:id="@+id/environmentSettingsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="Environment Settings"
         android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@id/adminButton"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/adminButton" />
 
-
-
-
-
-
-
-
-
-
-
+    <Button
+        android:id="@+id/petButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:text="Pet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.839"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/environmentSettingsButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

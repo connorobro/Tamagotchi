@@ -11,7 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.widget.Toast;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,7 +26,8 @@ import android.graphics.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+import android.widget.Toast;
+import java.util.Random;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private int loggedInUserId = LOGGED_OUT;
     private User user;
 
+    private int foodCount;
+
 
 // admin button
     @Override
@@ -75,6 +78,15 @@ public class MainActivity extends AppCompatActivity {
         binding.settingsbutton.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
+        });
+
+        foodCount = 0;
+
+        binding.petButton.setOnClickListener(v -> {
+            Toast.makeText(this, "Meow!", Toast.LENGTH_SHORT).show();
+            int consumed = new Random().nextInt(3) + 1;
+            foodCount = Math.max(foodCount - consumed, 0);
+            updateUI();
         });
 
         binding.minigameButton.setOnClickListener(v -> launchMinigame());
@@ -151,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI() {
         binding.titleText.setText("Welcome to Tamagotchi!");
+        binding.foodCountText.setText("Food: " + foodCount);
     }
 
     @Override
@@ -234,8 +247,9 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_MINIGAME && resultCode == RESULT_OK && data != null) {
             int foodGained = data.getIntExtra("score", 0);
-            // e.g. add it to your Tamagotchi’s hunger meter:
-            binding.titleText.setText("You fetched " + foodGained + " food!");
+            foodCount += foodGained;
+
+            updateUI();
         }
     }
 
